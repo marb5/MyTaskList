@@ -55,3 +55,5 @@ public class App {
         server.join();
     }
 }
+
+//ServletRequest to interface do HttpServletRequest
