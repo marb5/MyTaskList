@@ -18,9 +18,25 @@ import java.io.IOException;
 //urlPatterns - adresy url przekierowujace do tego servletu, tablica stringow
 @WebServlet(name = "MojServlet", urlPatterns = {"/api/*"})
 public class MyServlet extends HttpServlet {
+    //zmienna dla nazwy parametru name
+    private static final String NAME_PARAM = "name";
     //logger
     private final Logger logger = LoggerFactory.getLogger(HttpServlet.class);
-    public String param = null;
+    //obiekt serwisu, aby klasa spelniala signle responsibility principle
+    //reprezentuje on warstwe biznesowa aplikacji
+    private MyService service;
+    
+    //wymagany dla jetty'ego konstruktor domyslny servletu, on go sobie inicjalizuje, kiedy potrzebuje
+    //tworzony, aby obslugiwal serwis
+    @SuppressWarnings("unused") //Servlet container potrzebuje tej adnotacji
+    public MyServlet(){
+        this(new MyService());
+    }
+    
+    //konstruktor
+    MyServlet(MyService service) {
+        this.service = service;
+    }
     
     //przeciazenie metody doGet
     @Override
@@ -37,13 +53,9 @@ public class MyServlet extends HttpServlet {
         String parameterName = req.getParameter("name");
  
         //jezeli taki zostal podany to wypisujemy wiadomosc z imieniem, inaczej hello world
-        if (parameterName != null) {
-            resp.getWriter().write("Hello ");
-            resp.getWriter().write(parameterName);
-            resp.getWriter().write("! servlet");
-        }
-        else
-            resp.getWriter().write("Hello world! servlet");
+        //nasz service zwraca imie, badz domyslne slowo zamienne
+        String greeting = service.greeting(parameterName);
+        resp.getWriter().write("Hello " + greeting + "! servlet");
  
     }
 }
