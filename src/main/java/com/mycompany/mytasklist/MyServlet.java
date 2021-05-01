@@ -18,8 +18,9 @@ import java.io.IOException;
 //urlPatterns - adresy url przekierowujace do tego servletu, tablica stringow
 @WebServlet(name = "MojServlet", urlPatterns = {"/api/*"})
 public class MyServlet extends HttpServlet {
-    //zmienna dla nazwy parametru name
+    //zmienna dla nazwy parametru name, lang
     private static final String NAME_PARAM = "name";
+    private static final String LANG_PARAM = "lang";
     //logger
     private final Logger logger = LoggerFactory.getLogger(HttpServlet.class);
     //obiekt serwisu, aby klasa spelniala signle responsibility principle
@@ -50,11 +51,13 @@ public class MyServlet extends HttpServlet {
         logger.info("Request got!");
  
         //pobieramy parametr name
-        String parameterName = req.getParameter("name");
+        String parameterName = req.getParameter(NAME_PARAM);
+        String parameterLang = req.getParameter(LANG_PARAM);
  
         //jezeli taki zostal podany to wypisujemy wiadomosc z imieniem, inaczej hello world
         //nasz service zwraca imie, badz domyslne slowo zamienne
-        String greeting = service.greeting(parameterName);
+        //drugi parametr oznacza jezyk
+        String greeting = service.greeting(parameterName, parameterLang);
         resp.getWriter().write(greeting);
  
     }
