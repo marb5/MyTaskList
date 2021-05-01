@@ -8,6 +8,8 @@ import java.util.Optional;
  *
  * @author marcin
  */
+//repozytorium, w ktorym przechowujemy obiekty naszych jezykow, kiedy potrzeba
+//bedzie sie laczyc z baza danych
 public class LanguageRepository {
     private List<Language> languages;
     
@@ -19,9 +21,10 @@ public class LanguageRepository {
    
     //optional daje zabezpieczenie w przypadku, kiedy nie ma jezyka o takim id
     Optional<Language> findById(Long id) {
-        //odfiltrowujemy z naszej listy szukane id, wyrzuca pierwszy znaleziony
+        //odfiltrowujemy (przy pomocy strumienia) z naszej listy szukane id, 
+        //wyrzuca pierwszy znaleziony
         return languages.stream()
-                .filter(l -> l.getId
+                .filter(l -> l.getId()
                         .equals(id)).findFirst();
     }
 }

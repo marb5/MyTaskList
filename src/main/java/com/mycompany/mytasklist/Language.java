@@ -4,6 +4,7 @@ package com.mycompany.mytasklist;
  *
  * @author marcin
  */
+//klasa, a dokladniej pojo, ktore umozliwi korzystanie z roznych jezykow
 public class Language {
     //long, ktory zawiera nulla w przypadku, kiedy nie ma 
     //jeszcze naszego elementu w tablicy bazy danych

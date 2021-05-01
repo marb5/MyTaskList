@@ -23,11 +23,11 @@ class MyService {
     
     //metoda zwraca odpowiedznie przywitanie z serwera, w zaleznosci od parametru name
     String greeting(String name) {
-        return prepareGreeting(name, defaultLanguage.getId());
+        return greeting(name, defaultLanguage.getId());
     }
     
     String greeting(String name, Long id) {
-        String welcomeMsg = repository.findById(id).orElse(defaultLanguage.getMessage());
+        String welcomeMsg = repository.findById(id).orElse(defaultLanguage).getMessage();
         //optional chroni przed wprowadzeniem wartosci NULL
         String welcomeName = Optional.ofNullable(name).orElse(defaultName);
         return welcomeMsg + " " + welcomeName + "!";
