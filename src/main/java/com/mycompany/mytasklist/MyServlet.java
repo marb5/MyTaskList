@@ -55,7 +55,7 @@ public class MyServlet extends HttpServlet {
         //jezeli taki zostal podany to wypisujemy wiadomosc z imieniem, inaczej hello world
         //nasz service zwraca imie, badz domyslne slowo zamienne
         String greeting = service.greeting(parameterName);
-        resp.getWriter().write("Hello " + greeting + "! servlet");
+        resp.getWriter().write(greeting);
  
     }
 }

@@ -16,7 +16,7 @@ public class LanguageRepository {
         languages.add(new Language(1L, "Hello", "en"));
         languages.add(new Language(2L, "Witaj", "pl"));
     }
-    
+   
     //optional daje zabezpieczenie w przypadku, kiedy nie ma jezyka o takim id
     Optional<Language> findById(Long id) {
         //odfiltrowujemy z naszej listy szukane id, wyrzuca pierwszy znaleziony

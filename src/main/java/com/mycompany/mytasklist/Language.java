@@ -30,11 +30,11 @@ public class Language {
         return code;
     }
     
-    public setMessage(String message) {
+    public void setMessage(String message) {
         this.message = message;
     }
     
-    public setCode(String code) {
+    public void setCode(String code) {
         this.code = code;
     }
 }

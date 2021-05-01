@@ -26,7 +26,7 @@ public class MyServiceTest {
         String result = SUT.greeting(name);
         
         //then
-        assertEquals("world", result);
+        assertEquals("Hello world!", result);
     }
     
     @Test
@@ -38,6 +38,6 @@ public class MyServiceTest {
         String result = SUT.greeting(name);
         
         //then
-        assertEquals(name, result);
+        assertEquals("Hello " + name + "!", result);
     }
 }
