@@ -5,7 +5,7 @@ package com.mycompany.mytasklist;
  * @author marcin
  */
 public class Language {
-    //obiekt owijajacy longa, aby zawieral nulla w przypadku, kiedy nie ma 
+    //long, ktory zawiera nulla w przypadku, kiedy nie ma 
     //jeszcze naszego elementu w tablicy bazy danych
     //id zawiera kod jezyka, w ktorym urzytkownik chce dzialac
     private Long id;
