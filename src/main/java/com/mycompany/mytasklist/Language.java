@@ -9,17 +9,17 @@ public class Language {
     //long, ktory zawiera nulla w przypadku, kiedy nie ma 
     //jeszcze naszego elementu w tablicy bazy danych
     //id zawiera kod jezyka, w ktorym urzytkownik chce dzialac
-    private Long id;
+    private Integer id;
     private String message; //nasza wiadomosc
     private String code; //kod jezyka
     
-    Language(Long id, String message, String code) {
+    Language(Integer id, String message, String code) {
         this.id = id;
         this.message = message;
         this.code = code;
     }
     
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     

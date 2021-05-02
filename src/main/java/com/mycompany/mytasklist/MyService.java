@@ -14,7 +14,7 @@ import java.util.Optional;
 class MyService {
     //zmienna przechowujaca, co zwrocic w przypadku braku parametru name
     public static final String defaultName = "world";
-    public static final Language defaultLanguage = new Language(1L, "Hello", "en");
+    public static final Language defaultLanguage = new Language(1, "Hello", "en");
     private LanguageRepository repository;
     private final Logger logger = LoggerFactory.getLogger(MyService.class);
     
@@ -29,9 +29,9 @@ class MyService {
     String greeting(String name, String langId) {
         //konwersja na Long w przypadku Stringa nie nullowego
         //w przeciwnym wypadku wartosc domysla id jezyka
-        Long id;
+        Integer id;
         try {
-            id = Optional.ofNullable(langId).map(Long::valueOf).orElse(defaultLanguage.getId());
+            id = Optional.ofNullable(langId).map(Integer::valueOf).orElse(defaultLanguage.getId());
         }
         //w przypadku podania tekstowego id jezyka, zwracany jest wyjatek, ze
         //nie mozna skonwertowac na Longa

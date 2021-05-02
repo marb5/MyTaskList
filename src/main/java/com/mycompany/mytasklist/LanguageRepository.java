@@ -15,12 +15,12 @@ public class LanguageRepository {
     
     LanguageRepository() {
         languages = new ArrayList<>();
-        languages.add(new Language(1L, "Hello", "en"));
-        languages.add(new Language(2L, "Witaj", "pl"));
+        languages.add(new Language(1, "Hello", "en"));
+        languages.add(new Language(2, "Witaj", "pl"));
     }
    
     //optional daje zabezpieczenie w przypadku, kiedy nie ma jezyka o takim id
-    Optional<Language> findById(Long id) {
+    Optional<Language> findById(Integer id) {
         //odfiltrowujemy (przy pomocy strumienia) z naszej listy szukane id, 
         //wyrzuca pierwszy znaleziony
         return languages.stream()
