@@ -9,8 +9,8 @@ import java.util.Optional;
 //przygotowuje nasze powitanie
 class MyService {
     //zmienna przechowujaca, co zwrocic w przypadku braku parametru name
-    private static final String defaultName = "world";
-    private static final Language defaultLanguage = new Language(1L, "Hello ", "en");
+    public static final String defaultName = "world";
+    public static final Language defaultLanguage = new Language(1L, "Hello ", "en");
     private LanguageRepository repository;
     
     public MyService() {
@@ -20,12 +20,7 @@ class MyService {
     public MyService(LanguageRepository repository) {
         this.repository = repository;
     }
-    
-    //metoda zwraca odpowiedznie przywitanie z serwera, w zaleznosci od parametru name
-    String greeting(String name) {
-        return greeting(name, defaultLanguage.getId().toString());
-    }
-    
+
     String greeting(String name, String langId) {
         //konwersja na Long w przypadku Stringa nie nullowego
         //w przeciwnym wypadku wartosc domysla id jezyka
