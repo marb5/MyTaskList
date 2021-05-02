@@ -10,7 +10,7 @@ import org.junit.Test;
  * @author marcin
  */
 public class MyServiceTest {
-    private final static String WELCOME = "Hello";
+    private final static String WELCOME = "Hi";
     
     private LanguageRepository getMockLanguageRepository() {
         //tworzymy obiekt, w ktorym podmieniamy dane z LanguageRepository
@@ -27,7 +27,7 @@ public class MyServiceTest {
     }
     
     @Test
-    public void testGreeting_nullName_returnsDefaultValue() throws Exception {
+    public void testGreeting_nullNamenullLang_returnsGreetingWithDefaultNameMockLang() throws Exception {
         //given
         var mockRepository = getMockLanguageRepository();
         //SUT - system under test
@@ -43,7 +43,7 @@ public class MyServiceTest {
     }
     
     @Test
-    public void testGreeting_name_returnsName() throws Exception {
+    public void testGreeting_gotNamenullLang_returnsGreetingWithNameMockLang() throws Exception {
         //given
         var mockRepository = getMockLanguageRepository();
         MyService SUT = new MyService(mockRepository);
@@ -55,4 +55,20 @@ public class MyServiceTest {
         //then
         assertEquals(WELCOME + ' ' + name + '!', result);
     }
+    
+    @Test
+    //przypadek, w ktorym uzytkownik poda tekstowy id jezyka
+    public void testGreeting_gotNametextLang_returnsGreetingWithNameMockLang() throws Exception {
+        //given
+        var mockRepository = getMockLanguageRepository();
+        MyService SUT = new MyService(mockRepository);
+        String name = "TwojeImie";
+        
+        //when
+        String result = SUT.greeting(name, "a");
+        
+        //then
+        assertEquals(WELCOME + ' ' + name + '!', result);
+    }
+    
 }

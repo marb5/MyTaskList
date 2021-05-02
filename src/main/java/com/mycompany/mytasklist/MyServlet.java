@@ -22,7 +22,7 @@ public class MyServlet extends HttpServlet {
     private static final String NAME_PARAM = "name";
     private static final String LANG_PARAM = "lang";
     //logger
-    private final Logger logger = LoggerFactory.getLogger(HttpServlet.class);
+    private final Logger logger = LoggerFactory.getLogger(MyServlet.class);
     //obiekt serwisu, aby klasa spelniala signle responsibility principle
     //reprezentuje on warstwe biznesowa aplikacji
     private MyService service;
