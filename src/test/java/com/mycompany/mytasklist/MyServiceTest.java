@@ -10,7 +10,7 @@ import org.junit.Test;
  * @author marcin
  */
 public class MyServiceTest {
-    private final static String WELCOME = "Hi";
+    private final static String MOCK_WELCOME = "Hi";
     
     private LanguageRepository getMockLanguageRepository() {
         //tworzymy obiekt, w ktorym podmieniamy dane z LanguageRepository
@@ -21,7 +21,7 @@ public class MyServiceTest {
             Optional<Language> findById(Long id) {
                 //optional of, a nie ofNullable, bo mamy pewnosc, ze obiekt
                 //istnieje, bo wlasnie go tworzymy
-                return Optional.of(new Language(null, WELCOME, null));
+                return Optional.of(new Language(null, MOCK_WELCOME, null));
             }
         };
     }
@@ -39,7 +39,7 @@ public class MyServiceTest {
         String result = SUT.greeting(null, "-1");
         
         //then
-        assertEquals(WELCOME + ' ' + MyService.defaultName + '!', result);
+        assertEquals(MOCK_WELCOME + ' ' + MyService.defaultName + '!', result);
     }
     
     @Test
@@ -53,7 +53,7 @@ public class MyServiceTest {
         String result = SUT.greeting(name, "-1");
         
         //then
-        assertEquals(WELCOME + ' ' + name + '!', result);
+        assertEquals(MOCK_WELCOME + ' ' + name + '!', result);
     }
     
     @Test
@@ -68,7 +68,30 @@ public class MyServiceTest {
         String result = SUT.greeting(name, "a");
         
         //then
-        assertEquals(WELCOME + ' ' + name + '!', result);
+        assertEquals(MOCK_WELCOME + ' ' + name + '!', result);
+    }
+    
+    @Test
+    //przypadek, w ktorym repozytorium nie dziala
+    public void testGreeting_gotNamenotExistingLang_returnsGreetingWithNameDefaultLang() throws Exception {
+        //given
+        var emptyRepository = new LanguageRepository() {
+            //przeciazenie metody, aby nie zwracala jezyka
+            @Override
+            Optional<Language> findById(Long id) {
+                //nie zwracamy zadnego jezyka
+                return Optional.empty();
+            }
+        };
+        MyService SUT = new MyService(emptyRepository);
+        String name = "TwojeImie";
+        
+        //when
+        String result = SUT.greeting(name, "-1");
+        
+        //then
+        //zahardkodowany domyslny jezyk w serwisie, metoda zwraca slowo powitalne
+        assertEquals(SUT.defaultLanguage.getMessage() + ' ' + name + '!', result);
     }
     
 }
