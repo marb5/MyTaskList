@@ -1,17 +1,39 @@
 package com.mycompany.mytasklist;
 
+import javax.persistence.Entity;
+import javax.persistance.Table;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 /**
  *
  * @author marcin
  */
+//adnotacje mapujace obiekt klasy na tabele w bazie danych (ORM)
+@Entity
+@Table( name = "LANGUAGE" )
 //klasa, a dokladniej pojo, ktore umozliwi korzystanie z roznych jezykow
 public class Language {
     //long, ktory zawiera nulla w przypadku, kiedy nie ma 
     //jeszcze naszego elementu w tablicy bazy danych
     //id zawiera kod jezyka, w ktorym urzytkownik chce dzialac
+    @Id
+    //inc to nazwa generatora, ktory informuje o strategii (increment)
+    //nadawania id dla Language
+    @GeneratedValue(generator="inc")
+    @GenericGenerator(name="inc", strategy = "increment")
     private Integer id;
+    @Column(name = "welcome_message")
     private String message; //nasza wiadomosc
     private String code; //kod jezyka
+    
+    //trzeba stworzyc konstruktor domyslny dla hibernate'a (jpa - java 
+    //persistance api, hibernate jest konkretyzacja dla tego standardu)
+    @SuppressWarnings("unused")
+    Language() {
+        
+    }
     
     Language(Integer id, String message, String code) {
         this.id = id;

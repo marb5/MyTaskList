@@ -49,7 +49,16 @@ public class App {
         //tworzenie serwera na porcie 8080
         Server server = new Server(8080);
         server.setHandler(webapp);
-
+        //nasluchiwacz cyklu zycia serwera, obusluguje, co ma sie stac w przypadku
+        //zakonczenia pracy serwera (jetty w naszym przypadku), tutaj zamyka
+        //polaczenia z baza danych
+        server.addLifeCycleListener(new AbstractLifeCycle.AbstractLifeCycleListener() {
+            @Override
+            public void lifeCycleStopped(LifeCycle event) {
+                HibernateUtil.close();
+            }
+        });
+        
         //odpalenie serwera i watku
         server.start();
         server.join();
