@@ -1,6 +1,7 @@
 package com.mycompany.mytasklist;
 
 import java.util.Optional;
+import java.util.List;
 
 /**
  *
@@ -33,5 +34,20 @@ public class LanguageRepository {
         }
         */
         return Optional.ofNullable(result);
+    }
+    
+    //metoda zwracajaca wszystkie jezyki z tabeli
+    List<Language> findAll() {
+        var session = HibernateUtil.getSessionFactory().openSession();
+        var transaction = session.beginTransaction();
+        
+        //tworzy zapytanie pobierajace wszystko z tablicy Language
+        //kazdy wynik zapisuje jako klase Language
+        //nastepnie wrzuca wszystko do listy
+        var result = session.createQuery("from Language", Language.class).list();
+        
+        transaction.commit();
+        session.close();
+        return result;
     }
 }

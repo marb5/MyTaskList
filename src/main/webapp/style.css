@@ -1,0 +1,27 @@
+body {
+    font-family: arial;
+}
+
+form {
+    position: absolute;
+    left: 50%;
+    margin-top: 7px;
+    transform: translateX(-50%);
+}
+
+form input {
+    margin: 5px;
+}
+
+form button {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

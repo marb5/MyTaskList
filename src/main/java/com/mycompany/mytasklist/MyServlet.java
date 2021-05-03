@@ -42,13 +42,16 @@ public class MyServlet extends HttpServlet {
     //przeciazenie metody doGet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //missing Access-Control-Allow-Origin CORS header, it informs do origin
+        //can access resource, temporary solution
+        resp.addHeader("Access-Control-Allow-Origin", "*");
         //uchwyt do zapytania i opdpowiedzi z serwera
         handleRequest(req, resp);
     }
     
     public void handleRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //odpowiedz serwera
-        logger.info("Request got!");
+        logger.info("Request got! with parameters " + req.getParameterMap());
  
         //pobieramy parametr name
         String parameterName = req.getParameter(NAME_PARAM);
