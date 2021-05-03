@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 //adnotacja sluzaca do konfigurowania servletu
 //urlPatterns - adresy url przekierowujace do tego servletu, tablica stringow
-@WebServlet(name = "MojServlet", urlPatterns = {"/api/*"})
+@WebServlet(name = "MojServlet", urlPatterns = {"/api"})
 public class MyServlet extends HttpServlet {
     //zmienna dla nazwy parametru name, lang
     private static final String NAME_PARAM = "name";
@@ -44,7 +44,7 @@ public class MyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //missing Access-Control-Allow-Origin CORS header, it informs do origin
         //can access resource, temporary solution
-        resp.addHeader("Access-Control-Allow-Origin", "*");
+        //resp.addHeader("Access-Control-Allow-Origin", "*");
         
         //odpowiedz serwera
         logger.info("Request got! with parameters " + req.getParameterMap());
@@ -57,6 +57,7 @@ public class MyServlet extends HttpServlet {
         //nasz service zwraca imie, badz domyslne slowo zamienne
         //drugi parametr oznacza jezyk
         String greeting = service.greeting(parameterName, parameterLang);
+        //resp.setContentType("text/plain");
         resp.getWriter().write(greeting);
     }
     

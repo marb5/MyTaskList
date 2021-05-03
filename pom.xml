@@ -16,15 +16,18 @@
             <junit.version>4.12</junit.version>
             <slf4j.version>1.7.25</slf4j.version>
             <jetty.version>9.4.14.v20181114</jetty.version>
+            <jackson.version>2.12.0</jackson.version>
         </properties>
 
         <dependencies>
+            <!-- testy -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
+            <!-- logger -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -35,6 +38,7 @@
                 <artifactId>slf4j-simple</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
+            <!-- servlet -->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
@@ -62,6 +66,12 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
                 <version>5.4.31.Final</version>
+            </dependency>
+            <!-- json -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
         </dependencies>
 
