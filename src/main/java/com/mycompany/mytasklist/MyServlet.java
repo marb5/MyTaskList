@@ -45,11 +45,7 @@ public class MyServlet extends HttpServlet {
         //missing Access-Control-Allow-Origin CORS header, it informs do origin
         //can access resource, temporary solution
         resp.addHeader("Access-Control-Allow-Origin", "*");
-        //uchwyt do zapytania i opdpowiedzi z serwera
-        handleRequest(req, resp);
-    }
-    
-    public void handleRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        
         //odpowiedz serwera
         logger.info("Request got! with parameters " + req.getParameterMap());
  
@@ -62,6 +58,6 @@ public class MyServlet extends HttpServlet {
         //drugi parametr oznacza jezyk
         String greeting = service.greeting(parameterName, parameterLang);
         resp.getWriter().write(greeting);
- 
     }
+    
 }

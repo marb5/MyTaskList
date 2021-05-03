@@ -9,9 +9,13 @@
 </head>
 <body>
     <form action="">
-        <input type="text" name="name" placeholder="name"><br>
-        <input type="radio" name="lang" value="1"><label>en</label><br>
-        <input type="radio" name="lang" value="2"><label>pl</label><br>
+        <fieldset>
+            <input type="text" name="name" placeholder="name"><br>
+            <fieldset class="langs">
+                <input type="radio" name="lang" value="1"><label>en</label><br>
+                <input type="radio" name="lang" value="2"><label>pl</label><br>
+            </fieldset>
+        </fieldset>
         <button>Submit</button>
     </form>
     <div></div>
