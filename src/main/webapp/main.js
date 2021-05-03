@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:8080/api";
+//const API_URL = "127.0.0.1:8080/api";
+const API_URL = "/api";
 const form = document.querySelector("form");
 const div = document.querySelector("div");
 const langsField = document.querySelector("fieldset .langs");
