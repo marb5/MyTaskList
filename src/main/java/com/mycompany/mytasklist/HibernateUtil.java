@@ -24,7 +24,7 @@ public class HibernateUtil {
 
     //"budowanie fabryki sesji", co ma sie dziac przy tworzeniu obiektu,
     //laczenie z baza danych
-    private static void buildSessionFactory() {
+    private static SessionFactory buildSessionFactory() {
             // A SessionFactory is set up once for an application!
             final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                             .configure() // configures settings from hibernate.cfg.xml

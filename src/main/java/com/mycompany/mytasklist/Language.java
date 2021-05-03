@@ -1,11 +1,13 @@
 package com.mycompany.mytasklist;
 
 import javax.persistence.Entity;
-import javax.persistance.Table;
+import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 /**
  *
  * @author marcin
