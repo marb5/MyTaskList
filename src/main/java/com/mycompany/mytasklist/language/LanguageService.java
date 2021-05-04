@@ -1,12 +1,11 @@
 package com.mycompany.mytasklist.language;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
 /**
  *
  * @author marcin
