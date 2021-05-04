@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  *
  * @author marcin
@@ -23,22 +21,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class LanguageServlet extends HttpServlet {
     //logger
     private final Logger logger = LoggerFactory.getLogger(LanguageServlet.class);
-    
-    private LanguageRepository repository;
-    //Obiekt, w ktorym zachodzi mapowanie danych na jsona
-    private ObjectMapper mapper;
+    private LanguageService langService = new LanguageService();
     
     //wymagany dla jetty'ego konstruktor domyslny servletu, on go sobie inicjalizuje, kiedy potrzebuje
     //tworzony, aby obslugiwal serwis
     @SuppressWarnings("unused") //Servlet container potrzebuje tej adnotacji
     public LanguageServlet(){
-        this(new LanguageRepository(), new ObjectMapper());
+        this(new LanguageService());
     }
     
     //konstruktor
-    LanguageServlet(LanguageRepository repository, ObjectMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
+    LanguageServlet(LanguageService langService) {
+        this.langService = langService;
     }
     
     //przeciazenie metody doGet
@@ -47,8 +41,8 @@ public class LanguageServlet extends HttpServlet {
         logger.info("Request got! Sending languages...");
         //w naglowku podajemy typ wysylanych danych
         resp.setContentType("application/json;charset=UTF-8");
-        //przy pomocy metody z mappera wysylamy dane z bazy jako response
-        mapper.writeValue(resp.getOutputStream(), repository.findAll());
+        //wysylamy dane z bazy w response
+        resp.getWriter().write(langService.getLanguages());
     }
     
 }
