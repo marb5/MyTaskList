@@ -1,4 +1,6 @@
-package com.mycompany.mytasklist;
+package com.mycompany.mytasklist.language;
+
+import com.mycompany.mytasklist.HibernateUtil;
 
 import java.util.Optional;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
 //bedzie sie laczyc z baza danych
 public class LanguageRepository {
     //optional daje zabezpieczenie w przypadku, kiedy nie ma jezyka o takim id
-    Optional<Language> findById(Integer id) {
+    public Optional<Language> findById(Integer id) {
         //otwieranie sesji polaczenia z baza danych
         var session = HibernateUtil.getSessionFactory().openSession();
         //w trasakcji po rozpoczeciu wszystko jest zawieszone, dopoki

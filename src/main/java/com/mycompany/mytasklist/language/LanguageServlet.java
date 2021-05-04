@@ -1,4 +1,4 @@
-package com.mycompany.mytasklist;
+package com.mycompany.mytasklist.language;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +45,6 @@ public class LanguageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("Request got! Sending languages...");
-        //resp.addHeader("Access-Control-Allow-Origin", "*");
         //w naglowku podajemy typ wysylanych danych
         resp.setContentType("application/json;charset=UTF-8");
         //przy pomocy metody z mappera wysylamy dane z bazy jako response

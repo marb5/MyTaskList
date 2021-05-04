@@ -1,4 +1,7 @@
-package com.mycompany.mytasklist;
+package com.mycompany.mytasklist.mys;
+
+import com.mycompany.mytasklist.language.Language;
+import com.mycompany.mytasklist.language.LanguageRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +14,7 @@ import java.util.Optional;
  */
 //tworzenie serwisu, reprezentuje on kolejna wartwe, odpowiadajaca za logike biznesowa
 //przygotowuje nasze powitanie
-class MyService {
+public class MyService {
     //zmienna przechowujaca, co zwrocic w przypadku braku parametru name
     public static final String defaultName = "world";
     public static final Language defaultLanguage = new Language(1, "Hello", "en");
@@ -26,7 +29,7 @@ class MyService {
         this.repository = repository;
     }
 
-    String greeting(String name, String langId) {
+    public String greeting(String name, String langId) {
         //konwersja na Long w przypadku Stringa nie nullowego
         //w przeciwnym wypadku wartosc domysla id jezyka
         Integer id;

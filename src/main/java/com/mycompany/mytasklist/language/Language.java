@@ -1,4 +1,4 @@
-package com.mycompany.mytasklist;
+package com.mycompany.mytasklist.language;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -37,7 +37,7 @@ public class Language {
         
     }
     
-    Language(Integer id, String message, String code) {
+    public Language(Integer id, String message, String code) {
         this.id = id;
         this.message = message;
         this.code = code;

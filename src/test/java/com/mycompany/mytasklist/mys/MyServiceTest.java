@@ -1,4 +1,9 @@
-package com.mycompany.mytasklist;
+package com.mycompany.mytasklist.mys;
+
+import com.mycompany.mytasklist.mys.MyService;
+import com.mycompany.mytasklist.language.Language;
+import com.mycompany.mytasklist.language.LanguageRepository;
+
 import java.util.Optional;
 
 import static org.junit.Assert.assertTrue;
@@ -18,7 +23,7 @@ public class MyServiceTest {
         return new LanguageRepository() {
             //przeciazenie metody, aby zawsze zwracala konkretny lang
             @Override
-            Optional<Language> findById(Integer id) {
+            public Optional<Language> findById(Integer id) {
                 //optional of, a nie ofNullable, bo mamy pewnosc, ze obiekt
                 //istnieje, bo wlasnie go tworzymy
                 return Optional.of(new Language(null, MOCK_WELCOME, null));
@@ -78,7 +83,7 @@ public class MyServiceTest {
         var emptyRepository = new LanguageRepository() {
             //przeciazenie metody, aby nie zwracala jezyka
             @Override
-            Optional<Language> findById(Integer id) {
+            public Optional<Language> findById(Integer id) {
                 //nie zwracamy zadnego jezyka
                 return Optional.empty();
             }

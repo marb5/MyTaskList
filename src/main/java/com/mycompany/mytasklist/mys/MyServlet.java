@@ -1,4 +1,4 @@
-package com.mycompany.mytasklist;
+package com.mycompany.mytasklist.mys;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,10 +42,6 @@ public class MyServlet extends HttpServlet {
     //przeciazenie metody doGet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //missing Access-Control-Allow-Origin CORS header, it informs do origin
-        //can access resource, temporary solution
-        //resp.addHeader("Access-Control-Allow-Origin", "*");
-        
         //odpowiedz serwera
         logger.info("Request got! with parameters " + req.getParameterMap());
  
