@@ -1,6 +1,7 @@
 package com.mycompany.mytasklist.tasklist;
 
 import com.mycompany.mytasklist.HibernateUtil;
+import org.hibernate.Query;
 
 import java.util.Optional;
 import java.util.List;
@@ -33,4 +34,32 @@ public class TaskRepository {
         session.close();
         return result;
     }
+    
+    public Optional<Task> toggleTask(Integer id) {
+        var session = HibernateUtil.getSessionFactory().openSession();
+        var transaction = session.beginTransaction();
+        
+        Task task = (Task)session.get(Task.class, id);
+       // List<Task> task = cast(list);
+       // task.get(0).setDone(!task.getDone());
+        task.setDone(!task.getDone());
+        String hql = "UPDATE Task set done = :taskDone " + 
+                     "WHERE id = :taskId";
+        Query query = session.createQuery(hql);
+        query.setParameter("taskDone", task.getDone());
+        query.setParameter("taskId", id);
+        var result = query.executeUpdate();
+        
+        if (result != 1 || task.getId() != id)
+            transaction.rollback();
+        transaction.commit();
+        
+        session.close();
+        return Optional.of(task);
+    } 
+    
+    public static <T extends List<?>> T cast(Object obj) {
+        return (T) obj;
+    }
+    
 }
