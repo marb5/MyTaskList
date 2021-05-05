@@ -20,8 +20,7 @@ public class Task {
     @GenericGenerator(name="inc", strategy = "increment")
     private Integer id;
     private String name;
-    @Column(columnDefinition = "boolean default false")
-    private Boolean done;
+    private Boolean done = false;
     
     @SuppressWarnings("unused")
     Task() {

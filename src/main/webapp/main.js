@@ -58,14 +58,50 @@
     function initTaskForm2() {
         const form = document.querySelector('form.taskForm');
         const tasksListeners = form.querySelectorAll('input[type="checkbox"]');
-        tasksListeners.forEach(function(task) {
-            task.addEventListener("click", (e) => {
-                e.preventDefault();
-                fetch(`${API_URL}/tasks/${task.value}`, { method: 'PUT' })
-                    .then(processOkResponse)
-                    .then(updatedTask => task.checked = updatedTask.done)
-                    .catch(console.warn);
-            });
+        
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            fetch(`${API_URL}/tasks`, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: form.elements.taskName.value })
+            })
+                .then(processOkResponse)
+                .then(addNewTask)
+                .then(() => form.elements.taskName.value = '')
+                .catch(console.warn);
+        });
+        tasksListeners.forEach(addTaskListener);
+    }
+    
+    //task - json - { id: 0, name: "asd", done: false }
+    function addNewTask(task) {
+        const form = document.querySelector('form.taskForm .tasks');
+        const checkbox = document.createElement("input");
+        const label = document.createElement("label");
+        
+        checkbox.type = "checkbox";
+        checkbox.name = "task";
+        checkbox.value = task.id;
+        checkbox.checked = task.done;
+        label.textContent = ` ${task.name}`;
+        
+        addTaskListener(checkbox);
+        form.appendChild(checkbox);
+        form.appendChild(label);
+        form.appendChild(document.createElement("br"));
+    }
+    
+    function addTaskListener(task) {
+        task.addEventListener("click", (e) => {
+            e.preventDefault();
+            fetch(`${API_URL}/tasks/${task.value}`, { method: 'PUT' })
+                .then(processOkResponse)
+                .then(updatedTask => task.checked = updatedTask.done)
+                .catch(console.warn);
         });
     }
     
