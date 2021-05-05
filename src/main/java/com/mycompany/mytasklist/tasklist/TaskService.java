@@ -42,6 +42,7 @@ public class TaskService {
         String data;
         Integer id;
         try {
+            taskId = taskId.substring(1);
             id = Integer.valueOf(taskId);
             try {
                 data = mapper.writeValueAsString(repository.toggleTask(id));
