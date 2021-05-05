@@ -21,7 +21,7 @@
       }
 
     function initWelcomeForm2() {
-        const form = document.querySelector("form");
+        const form = document.querySelector("form.welcomeForm");
 
         form.addEventListener("submit", function(event) {
             event.preventDefault();
@@ -35,8 +35,13 @@
                       <h1>${text}</h1>
                   `;
                   form.remove();
+                  initTaskForm();
                 });
         });
+    }
+    
+    function initTaskForm() {
+        document.querySelector('form.taskForm').style.display = 'block';
     }
     
     function processOkResponse(response = {}) {

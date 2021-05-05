@@ -18,3 +18,7 @@ form button {
     left: 50%;
     transform: translateX(-50%);
 }
+
+form .taskForm {
+    display: none;
+}

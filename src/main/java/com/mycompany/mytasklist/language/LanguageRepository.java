@@ -24,7 +24,7 @@ public class LanguageRepository {
         var transaction = session.beginTransaction();
         //wewnatrz funkcji get jest wykonywane zapytanie sql
         //pobieramy obiekt klasy dla szukanego id
-        var result = Optional.ofNullable(session.get(Language.class, id));
+        var result = session.get(Language.class, id);
         transaction.commit();
         session.close();
         /*
@@ -35,18 +35,19 @@ public class LanguageRepository {
             transaction.rollback();
         }
         */
-        return result;
+        return Optional.ofNullable(result);
     }
 
     //metoda zwracajaca wszystkie jezyki DTO z tabeli
-    List<LanguageDTO> findAll() {
+   // List<LanguageDTO> findAll() {
+    List<Language> findAll() {
         var session = HibernateUtil.getSessionFactory().openSession();
         var transaction = session.beginTransaction();
         
         //tworzy zapytanie pobierajace wszystko z tablicy Language
         //kazdy wynik zapisuje jako klase Language
         //nastepnie wrzuca wszystko do listy
-        var result = session.createQuery("id, code from Language", LanguageDTO.class).list();
+        var result = session.createQuery("from Language", Language.class).list();
         
         transaction.commit();
         session.close();

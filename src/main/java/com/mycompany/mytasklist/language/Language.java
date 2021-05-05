@@ -24,16 +24,21 @@ public class Language {
     //nadawania id dla Language
     @GeneratedValue(generator="inc")
     @GenericGenerator(name="inc", strategy = "increment")
-    private Integer id;
+    protected Integer id;
     @Column(name = "welcome_message")
     private String message; //nasza wiadomosc
-    private String code; //kod jezyka
+    protected String code; //kod jezyka
     
     //trzeba stworzyc konstruktor domyslny dla hibernate'a (jpa - java 
     //persistance api, hibernate jest konkretyzacja dla tego standardu)
     @SuppressWarnings("unused")
     Language() {
         
+    }
+    
+    public Language(Integer id, String code) {
+        this.id = id;
+        this.code = code;
     }
     
     public Language(Integer id, String message, String code) {

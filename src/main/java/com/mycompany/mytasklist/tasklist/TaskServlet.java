@@ -15,7 +15,7 @@ import java.io.IOException;
  *
  * @author marcin
  */
-@WebServlet(name = "TaskServlet", urlPatterns = {"/api/tasks"})
+@WebServlet(name = "TaskServlet", urlPatterns = {"/api/tasks/*"})
 public class TaskServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(TaskServlet.class);
     private TaskService taskService = new TaskService();
