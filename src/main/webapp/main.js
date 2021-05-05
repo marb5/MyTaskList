@@ -47,10 +47,17 @@
         fetch(`${API_URL}/tasks`)
                 .then(processOkResponse)
                 .then((taskArr) => {
-                    const tasks = taskArr.map(task => `<input type="checkbox" name="task" 
+                    const tasksHTML = taskArr.map(task => `<input type="checkbox" name="task" 
                                                   value="${task.id}" ${task.done ? "checked" : ""}>
                                                  <label>${task.name}</label><br>`).join('\n');
-                    document.querySelector("fieldset.tasks").innerHTML = tasks;
+                    document.querySelector("fieldset.tasks").innerHTML = tasksHTML;
+                    const tasksListeners = form.querySelectorAll('input[type="checkbox"]');
+                    tasksListeners.forEach(function(taskListen) {
+                        
+                        taskListen.addEventListener("click", (e) => {
+                            e.preventDefault();
+                        })
+                    });
                 });
     }
     
