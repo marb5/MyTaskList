@@ -40,8 +40,6 @@ public class TaskRepository {
         var transaction = session.beginTransaction();
         
         Task task = (Task)session.get(Task.class, id);
-       // List<Task> task = cast(list);
-       // task.get(0).setDone(!task.getDone());
         task.setDone(!task.getDone());
         String hql = "UPDATE Task set done = :taskDone " + 
                      "WHERE id = :taskId";
@@ -57,9 +55,5 @@ public class TaskRepository {
         session.close();
         return Optional.of(task);
     } 
-    
-    public static <T extends List<?>> T cast(Object obj) {
-        return (T) obj;
-    }
     
 }

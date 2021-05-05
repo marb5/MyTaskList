@@ -37,4 +37,24 @@ public class TaskService {
         }
         return data;
     }
+    
+    public String putTask(String taskId) {
+        String data;
+        Integer id;
+        try {
+            id = Integer.valueOf(taskId);
+            try {
+                data = mapper.writeValueAsString(repository.toggleTask(id));
+            }
+            catch (JsonProcessingException e){
+                logger.warn("Problem during processing task data from database");
+                data = "";
+            }
+        }
+        catch (NumberFormatException e) {
+            logger.warn("Non numeric task id: " + taskId);
+            data = "";
+        }
+        return data;
+    }
 }
