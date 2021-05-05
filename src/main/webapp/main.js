@@ -15,7 +15,7 @@
                                                  <label>${lang.code}</label><br>`).join('\n');
               //mapujemy nasza tablice, nastepnie zapisujemy dane w postaci html
               //laczymy je joinem w calosc przy pomocy '\n'
-              document.querySelector("fieldset .langs").innerHTML = langs; //przypisujemy kod html w odpowiednie pole
+              document.querySelector("fieldset.langs").innerHTML = langs; //przypisujemy kod html w odpowiednie pole
               initWelcomeForm2();
             });
       }
@@ -41,7 +41,17 @@
     }
     
     function initTaskForm() {
-        document.querySelector('form.taskForm').style.display = 'block';
+        const form = document.querySelector('form.taskForm');
+        form.style.display = 'block';
+        form.querySelector('input').value = "";
+        fetch(`${API_URL}/tasks`)
+                .then(processOkResponse)
+                .then((taskArr) => {
+                    const tasks = taskArr.map(task => `<input type="checkbox" name="task" 
+                                                  value="${task.id}" ${task.done ? "checked" : ""}>
+                                                 <label>${task.name}</label><br>`).join('\n');
+                    document.querySelector("fieldset.tasks").innerHTML = tasks;
+                });
     }
     
     function processOkResponse(response = {}) {

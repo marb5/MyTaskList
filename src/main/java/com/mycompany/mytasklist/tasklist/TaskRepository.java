@@ -27,7 +27,7 @@ public class TaskRepository {
         var session = HibernateUtil.getSessionFactory().openSession();
         var transaction = session.beginTransaction();
         
-        var result = session.createQuery("from Language", Task.class).list();
+        var result = session.createQuery("from Task", Task.class).list();
         
         transaction.commit();
         session.close();

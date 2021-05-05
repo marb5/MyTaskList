@@ -33,7 +33,7 @@
 
         <!-- Names the annotated entity class -->
         <mapping class="com.mycompany.mytasklist.language.Language"/>
-       <!-- <mapping class="com.mycompany.mytasklist.tasklist.Task"/> -->
+        <mapping class="com.mycompany.mytasklist.tasklist.Task"/>
 
     </session-factory>
 
