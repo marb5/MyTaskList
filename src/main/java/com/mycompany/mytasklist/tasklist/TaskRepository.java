@@ -6,11 +6,15 @@ import org.hibernate.Query;
 import java.util.Optional;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  *
  * @author marcin
  */
 public class TaskRepository {
+    private final Logger logger = LoggerFactory.getLogger(TaskServlet.class);
     //szukanie elementu task indexem
     public Optional<Task> findById(Integer id) {
         var session = HibernateUtil.getSessionFactory().openSession();
@@ -35,12 +39,13 @@ public class TaskRepository {
         return result;
     }
     
-    public Optional<Task> toggleTask(Integer id) {
+    public Task toggleTask(Integer id) {
         var session = HibernateUtil.getSessionFactory().openSession();
         var transaction = session.beginTransaction();
         
         Task task = (Task)session.get(Task.class, id);
         task.setDone(!task.getDone());
+        logger.info("Found task with id: " + task.getId());
         String hql = "UPDATE Task set done = :taskDone " + 
                      "WHERE id = :taskId";
         Query query = session.createQuery(hql);
@@ -53,7 +58,7 @@ public class TaskRepository {
         transaction.commit();
         
         session.close();
-        return Optional.of(task);
+        return task;
     } 
     
 }

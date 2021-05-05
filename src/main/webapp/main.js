@@ -51,14 +51,22 @@
                                                   value="${task.id}" ${task.done ? "checked" : ""}>
                                                  <label>${task.name}</label><br>`).join('\n');
                     document.querySelector("fieldset.tasks").innerHTML = tasksHTML;
-                    const tasksListeners = form.querySelectorAll('input[type="checkbox"]');
-                    tasksListeners.forEach(function(taskListen) {
-                        
-                        taskListen.addEventListener("click", (e) => {
-                            e.preventDefault();
-                        })
-                    });
+                    initTaskForm2();
                 });
+    }
+    
+    function initTaskForm2() {
+        const form = document.querySelector('form.taskForm');
+        const tasksListeners = form.querySelectorAll('input[type="checkbox"]');
+        tasksListeners.forEach(function(task) {
+            task.addEventListener("click", (e) => {
+                e.preventDefault();
+                fetch(`${API_URL}/tasks/${task.value}`, { method: 'PUT' })
+                    .then(processOkResponse)
+                    .then(updatedTask => task.checked = updatedTask.done)
+                    .catch(console.warn);
+            });
+        });
     }
     
     function processOkResponse(response = {}) {
