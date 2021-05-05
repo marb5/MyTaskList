@@ -17,6 +17,7 @@ import java.io.IOException;
  */
 @WebServlet(name = "TaskServlet", urlPatterns = {"/api/tasks/*"})
 public class TaskServlet extends HttpServlet {
+    private static final String NAME_PARAM = "name";
     private final Logger logger = LoggerFactory.getLogger(TaskServlet.class);
     private TaskService taskService = new TaskService();
     
@@ -42,5 +43,12 @@ public class TaskServlet extends HttpServlet {
         resp.setContentType("application/json;charset=UTF-8");
         //getPathInfo zwraca koncowke adresu przekierowujacego do servletu
         resp.getWriter().write(taskService.putTask(req.getPathInfo()));
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.info("Request got! Inserting task...");
+        resp.setContentType("application/json;charset=UTF-8");
+        resp.getWriter().write(taskService.addTask(req.getInputStream()));
     }
 }

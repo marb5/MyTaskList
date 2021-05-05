@@ -54,6 +54,23 @@ public class TaskRepository {
         
         session.close();
         return task;
-    } 
+    }
+    
+    public Task addTask(Task newTask) {
+        var session = HibernateUtil.getSessionFactory().openSession();
+        var transaction = session.beginTransaction();
+        
+        try {
+            session.persist(newTask);
+        }
+        catch (Exception e) {
+            transaction.rollback();
+        }
+        
+        transaction.commit();
+        
+        session.close();
+        return newTask;
+    }
     
 }

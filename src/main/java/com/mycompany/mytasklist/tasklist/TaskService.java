@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.io.InputStream;
+
 /**
  *
  * @author marcin
@@ -57,5 +59,20 @@ public class TaskService {
             data = "";
         }
         return data;
+    }
+    
+    public String addTask(InputStream taskName) {
+        String data;
+        
+        try {
+            Task newTask = mapper.readValue(taskName, Task.class);
+            data = mapper.writeValueAsString(repository.addTask(newTask));
+        }
+        catch (Exception e) {
+            logger.warn("Problem during processing task data");
+            data = "";
+        }
+        
+       return data;
     }
 }
