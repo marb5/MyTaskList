@@ -35,4 +35,12 @@ public class TaskServlet extends HttpServlet {
         resp.setContentType("application/json;charset=UTF-8");
         resp.getWriter().write(taskService.getTasks());
     }
+    
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.info("Request got! Updating task...");
+        resp.setContentType("application/json;charset=UTF-8");
+        //getPathInfo zwraca koncowke adresu przekierowujacego do servletu
+        resp.getWriter().write(taskService.putTask(req.getPathInfo()));
+    }
 }
